@@ -1,5 +1,6 @@
 // ==UserScript==
 // @match http://*.apollohq.com/
+// @match https://*.apollohq.com/
 // ==/UserScript==
 
 // Originally copied from a Gist at https://gist.github.com/1109648
@@ -32,7 +33,7 @@ function main() {
   jQuery(document).create('.apTaskSubject', function(event) {
     var task = jQuery(event.target);
     var originalHtml = task.html();
-    var taglessHtml = originalHtml.replace(/\s*\[([^\]]+)\]\s*/, function(tag) {
+    var taglessHtml = originalHtml.gsub(/\s*\[([^\]]+)\]\s*/, function(tag) {
       task.after(' <a class="lolTaskTag">' + tag.strip() + '</a>');
       return '';
     });
